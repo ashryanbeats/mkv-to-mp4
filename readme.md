@@ -1,25 +1,59 @@
-# convert_mkv_to_mp4.sh
+# MKV to MP4 Conversion Automation
 
-1. This script is triggered by:
+This project automates the process of converting MKV video files to MP4 format using a combination of AppleScript (for Folder Actions) and Node.js.
 
-A folder action script (AppleScript) on the Movies folder.
+NOTE: This project is intended for personal use and will require modifications to work in other environments, particarly for file paths referenced in the code.
 
-To set it or edit it, right click on the Movies folder, go to Servers, and select Folder Actions Setup.
+## Project Structure
 
-The script itself is at:
+- `convert.js`: Node.js script that handles the actual conversion process using FFmpeg.
+- `mkv-to-mp4-folder-action.scpt`: AppleScript that triggers the conversion process when new files are added to the specified folder.
+- `package.json`: Node.js project configuration.
+- `readme.md`: This file.
 
-`~/Library/Scripts/Folder\ Action\ Scripts.convert_mkv_to_mp4_folder_action.scpt`
+## Setup
 
-This location is required to have the script show up in the Folder Actions Setup picker.
+1. Ensure you have Node.js and FFmpeg installed on your system.
 
+2. Clone this repository to your local machine:
 
-2. Which in turn triggers this shell script in the Scripts folder.
+   ```bash
+   git clone https://your-repo-url.git ~/Scripts/mkv-to-mp4
+   ```
 
-The script is at:
+3. Install Node.js dependencies:
 
-`~/Scripts/convert_mkv_to_mp4.scpt`
+   ```bash
+   cd ~/Scripts/mkv-to-mp4
+   npm install
+   ```
 
-===
+4. Create a hard link for the AppleScript to the Folder Actions Scripts directory:
 
-You can see context at:
-https://claude.ai/chat/0e506627-be8a-43cd-85c8-5f0611bb57a1
+   ```bash
+   ln ~/Scripts/mkv-to-mp4/mkv-to-mp4-folder-action.scpt ~/Library/Scripts/Folder\ Action\ Scripts/mkv-to-mp4-folder-action.scpt
+   ```
+
+5. Set up the Folder Action:
+   - Right-click on your Movies folder
+   - Go to Services
+   - Select "Folder Actions Setup"
+   - Choose the `mkv-to-mp4-folder-action.scpt` script
+
+## How It Works
+
+1. When an MKV file is added to the Movies folder, the Folder Action script is triggered.
+2. The AppleScript calls the Node.js script (`convert.js`).
+3. The Node.js script uses FFmpeg to convert the MKV file to MP4 format.
+4. The original MKV file and the new MP4 file are moved to a new subdirectory named after part of the original file name.
+5. Notifications are shown upon successful conversion or if an error occurs.
+
+## Maintenance
+
+- Any changes made to the AppleScript file in either the git repository or the Folder Action Scripts directory will be reflected in both locations due to the hard link.
+- Most paths in both scripts are hardcoded and may need to be updated if the directory structure changes.
+
+## Troubleshooting
+
+- If the Folder Action stops working, check the log files in your local repo clone's `logs/` directory for error messages.
+- Ensure that the paths in both the AppleScript and Node.js script are correct and pointing to the right locations.
