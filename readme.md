@@ -15,27 +15,17 @@ NOTE: This project is intended for personal use and will require modifications t
 
 1. Ensure you have Node.js and FFmpeg installed on your system.
 
-2. Clone this repository to your local machine:
+2. Clone this repository
+
+3. Create a hard link for the AppleScript to the Folder Actions Scripts directory:
 
    ```bash
-   git clone https://your-repo-url.git ~/Scripts/mkv-to-mp4
+   ln ~/path/to/repo/mkv-to-mp4/mkv-to-mp4-folder-action.scpt ~/Library/Scripts/Folder\ Action\ Scripts/mkv-to-mp4-folder-action.scpt
    ```
 
-3. Install Node.js dependencies:
+4. Set up the Folder Action:
 
-   ```bash
-   cd ~/Scripts/mkv-to-mp4
-   npm install
-   ```
-
-4. Create a hard link for the AppleScript to the Folder Actions Scripts directory:
-
-   ```bash
-   ln ~/Scripts/mkv-to-mp4/mkv-to-mp4-folder-action.scpt ~/Library/Scripts/Folder\ Action\ Scripts/mkv-to-mp4-folder-action.scpt
-   ```
-
-5. Set up the Folder Action:
-   - Right-click on your Movies folder
+   - Right-click on your Movies folder (or wherever you want to watch for new MKV files)
    - Go to Services
    - Select "Folder Actions Setup"
    - Choose the `mkv-to-mp4-folder-action.scpt` script
